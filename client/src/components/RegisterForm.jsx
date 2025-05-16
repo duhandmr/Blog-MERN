@@ -23,7 +23,7 @@ function RegisterForm({
         onChange={handleChange}
         onBlur={handleBlur}
         value={values.username}
-        className="border-b-2 p-2 outline-none focus:border-indigo-600"
+        className="border-b-2 p-2 outline-none focus:border-indigo-600 transition-all ease-in"
       />
       <p className="text-red-600 text-sm">
         {errors.username && touched.username && errors.username}
@@ -36,9 +36,9 @@ function RegisterForm({
         onChange={handleChange}
         onBlur={handleBlur}
         value={values.email}
-        className="border-b-2 p-2 outline-none focus:border-indigo-600"
+        className="border-b-2 p-2 outline-none focus:border-indigo-600 transition-all ease-in"
       />
-      <p className="text-red-600 text-sm">
+      <p className="text-red-600 text-sm mt-1">
         {errors.email && touched.email && errors.email}
       </p>
 
@@ -49,7 +49,7 @@ function RegisterForm({
         onChange={handleChange}
         onBlur={handleBlur}
         value={values.password}
-        className="border-b-2 p-2 outline-none focus:border-indigo-600"
+        className="border-b-2 p-2 outline-none focus:border-indigo-600 transition-all ease-in"
       />
       <p className="text-red-600 text-sm">
         {errors.password && touched.password && errors.password}
@@ -62,11 +62,10 @@ function RegisterForm({
       {success && (
         <p className="text-green-600 text-sm text-center">{success}</p>
       )}
-
       <button
+        className="bg-violet-500 hover:bg-violet-600 focus:outline-2 focus:outline-offset-2 focus:outline-violet-500 active:bg-violet-700 rounded-2xl p-0.5 text-white"
         type="submit"
         disabled={isSubmitting}
-        className="bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700"
       >
         {isSubmitting ? "Kayıt Olunuyor..." : "Kayıt Ol"}
       </button>

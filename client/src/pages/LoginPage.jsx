@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import LoginForm from "../components/LoginForm";
-import RedirectRegisterBtn from "../components/RedirectRegisterBtn";
 import { loginUser } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../context/AuthContext";
 
 import { Formik } from "formik";
 
 function LoginPage() {
   const navigate = useNavigate();
   const [serverError, setServerError] = useState("");
+
+  const { login } = useContext(AuthContext);
+
   return (
-    <div className="flex flex-col justify-center items-center pt-5">
-      <h1>Login</h1>
+    <div className="min-h-screen flex items-center justify-center">
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={(values) => {
@@ -29,7 +32,11 @@ function LoginPage() {
           setServerError("");
           try {
             const data = await loginUser(values);
-            localStorage.setItem("token", data.token);
+            login({
+              username: data.user.username,
+              token: data.token,
+            });
+
             navigate("/blogs");
           } catch (err) {
             setServerError(err.response?.data?.message || "Login failed");
@@ -59,7 +66,6 @@ function LoginPage() {
           />
         )}
       </Formik>
-      <RedirectRegisterBtn />
     </div>
   );
 }
